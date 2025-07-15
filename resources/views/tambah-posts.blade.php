@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-
 <body>
-    <h1>Yo Hajimimasite</h1>
-    <a href="/posts">Lihat Posts</a>
+    <h1>YEEEE</h1>
+    <a href="/posts">Kembali ke posts</a>
 </body>
-
 </html>

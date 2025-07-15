@@ -9,8 +9,8 @@
 </head>
 
 <body>
-    <h1>Yo Hajimimasite</h1>
-    <a href="/posts">Lihat Posts</a>
+    <h1>Apa liat-liat?</h1>
+    <a href="/posts">Kembali ke posts</a>
 </body>
 
 </html>
