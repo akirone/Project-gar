@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <h1>Daftar Postingan</h1>
     <table style="width: 100%;" border="1">
         <thead>
             <tr>
@@ -19,21 +20,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Judul 1</td>
-                <td>Isi 1</td>
-                <td>
-                    <a href="#">Edit</a>
-                    <a href="#">Detail</a>
-                    <a href="#">Delete</a>
-                </td>
-            </tr>
+            @foreach ($dataPost as $post)
+                <tr>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{$post->judul}}</td>
+                    <td>{{$post->isi}}</td>
+                    <td>
+                        <a href="/edit-posts/{{$post->id}}">Edit</a>
+                        <a href="#">Detail</a>
+                        <a href="#">Delete</a>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
     <a href="/tambah-posts">Tambah Post</a>
-    <br>
-    <a href="/edit-posts">Edit Post</a>
     <br>
     <a href="/">Kembali ke Home</a>
 </body>

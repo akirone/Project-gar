@@ -1,14 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index()
+    public function dataPost()
     {
-        return view('posts');
+        $posts = Post::orderByDesc('id')->get();
+        return view('posts', [
+            'dataPost' => $posts
+    ]);
     }
 
     public function create()
@@ -16,8 +19,27 @@ class PostController extends Controller
         return view('tambah-posts');
     }
 
-        public function edit()
+    public function edit($id)
     {
-        return view('edit-posts');
+        // dd($id);
+        $post= Post::find($id);
+        // dd($post);
+        return view('edit-posts', [
+            'postingan' => $post
+        ]);
+    }
+    public function store(Request $request)
+    {
+        // dd($request->all());
+        Post::create($request->all());
+
+        return redirect('/posts');
+    }
+    public function update(Request $request, $id)
+    {
+        // dd($request->all());
+        $post= Post::find($id);
+        $post->update($request->all());
+        return redirect('/posts');
     }
 }
