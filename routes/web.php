@@ -16,3 +16,7 @@ Route::get('/edit-posts/{id}', [PostController::class, 'edit']);
 Route::post('/store', [PostController::class, 'store']);
 
 Route::put('/update/{id}', [PostController::class, 'update']);
+
+Route::get('/detail-posts/{id}', [PostController::class, 'show']);
+
+Route::delete('/delete-posts/{id}', [PostController::class, 'delete']);

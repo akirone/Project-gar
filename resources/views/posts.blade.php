@@ -27,8 +27,13 @@
                     <td>{{$post->isi}}</td>
                     <td>
                         <a href="/edit-posts/{{$post->id}}">Edit</a>
-                        <a href="#">Detail</a>
-                        <a href="#">Delete</a>
+                        <a href="/detail-posts/{{$post->id}}">Detail</a>
+                        <form action="/delete-posts/{{$post->id}}" method="post";>
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit"
+                                onclick="return confirm('Kamu yakin ??');">Hapus</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

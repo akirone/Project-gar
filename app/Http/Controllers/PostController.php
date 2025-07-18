@@ -8,7 +8,8 @@ class PostController extends Controller
 {
     public function dataPost()
     {
-        $posts = Post::orderByDesc('id')->get();
+        // $posts = Post::orderByDesc('id')->get();
+        $posts = Post::get();
         return view('posts', [
             'dataPost' => $posts
     ]);
@@ -40,6 +41,19 @@ class PostController extends Controller
         // dd($request->all());
         $post= Post::find($id);
         $post->update($request->all());
+        return redirect('/posts');
+    }
+    public function show($id)
+    {
+        $post = Post::find($id);
+        return view('detail-posts', [
+        'postingan' => $post
+        ]);
+    }
+    public function delete($id)
+    {
+        $post = Post::find($id);
+        $post->delete();
         return redirect('/posts');
     }
 }
