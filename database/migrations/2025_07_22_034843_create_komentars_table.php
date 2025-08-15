@@ -6,22 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('komentars', function (Blueprint $table) {
             $table->id();
-            $table->string('judul')->nullable();
-            $table->text('isi')->nullable();
-            $table->string('foto')->nullable();
+            $table->foreignId('post_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->string('isi')->nullable();
             $table->timestamps();
         });
     }
-
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('komentars');
     }
 };

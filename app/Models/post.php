@@ -2,11 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 class post extends Model
 {
-    protected $table = 'posts';
+    use HasFactory;
     
-    protected $fillable = ['judul', 'isi'];
+    protected $table = 'posts';
+
+    protected $fillable = ['judul', 'isi', 'foto'];
+
+    public function komentars()
+    {
+        return $this->hasMany(Komentar::class);
+    }
 }

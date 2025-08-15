@@ -10,25 +10,39 @@
 
 <body>
     <h1>Daftar Postingan</h1>
+
+    <a href="{{ route('posts.create') }}">Tambah Post</a>
+
+    <br>
+    <br>
+
+    <a href="{{ url('/') }}">Kembali ke Halaman utama</a>
+    @if (@session('success'))
+        <p style="color: rgb(0, 255, 76);">{{ session('success') }}</p>
+    @endif
     <table style="width: 100%;" border="1">
         <thead>
             <tr>
                 <th>No</th>
+                <th>Foto</th>
                 <th>Judul</th>
                 <th>Isi</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($dataPost as $post)
+            @foreach ($posts as $post)
                 <tr>
-                    <td>{{$loop->iteration}}</td>
-                    <td>{{$post->judul}}</td>
-                    <td>{{$post->isi}}</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>
-                        <a href="/edit-posts/{{$post->id}}">Edit</a>
-                        <a href="/detail-posts/{{$post->id}}">Detail</a>
-                        <form action="/delete-posts/{{$post->id}}" method="post";>
+                        <img src="{{ asset('storage/' . $post->foto) }}" style="width: 10px; height: 10px; object-fit: cover;">
+                    </td>
+                    <td>{{ $post->judul }}</td>
+                    <td>{{ $post->isi }}</td>
+                    <td>
+                        <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
+                        <a href="{{ route('posts.show', $post->id) }}">Detail</a>
+                        <form action="{{ route('posts.destroy', $post->id) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger" type="submit"
@@ -39,9 +53,5 @@
             @endforeach
         </tbody>
     </table>
-    <a href="/tambah-posts">Tambah Post</a>
-    <br>
-    <a href="/">Kembali ke Home</a>
 </body>
-
 </html>

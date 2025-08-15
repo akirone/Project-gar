@@ -2,21 +2,38 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\KomentarController;
+use App\Http\Controllers\AuthenticationController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/posts', [PostController::class, 'dataPost']);
+Route::resource('posts', PostController::class)
+    ->middleware('auth');
 
-Route::get('/tambah-posts', [PostController::class, 'create']);
+Route::resource('users', UserController::class)
+    ->middleware('auth');
 
-Route::get('/edit-posts/{id}', [PostController::class, 'edit']);
+Route::resource('komentar', KomentarController::class)
+    ->middleware('auth');
 
-Route::post('/store', [PostController::class, 'store']);
+Route::get('/login', [AuthenticationController::class, 'index'])
+    ->name('login')
+    ->middleware('guest');
 
-Route::put('/update/{id}', [PostController::class, 'update']);
+Route::post('/do-post', [AuthenticationController::class, 'doPost'])
+    ->name('do-post')
+    ->middleware('guest');
 
-Route::get('/detail-posts/{id}', [PostController::class, 'show']);
+Route::post('/do-logout', [AuthenticationController::class, 'doLogout'])
+    ->name('do-logout')
+    ->middleware('auth');
 
-Route::delete('/delete-posts/{id}', [PostController::class, 'delete']);
+Route::post('/do-register', [AuthenticationController::class, 'doRegister'])
+    ->name('do-Register')
+    ->middleware('guest');
+
+Route::get('/register', [AuthenticationController::class, 'register'])  
+    ->name('register');
